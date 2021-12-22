@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'devise/sessions#new'
+  root 'fixed_costs#index'
+  resources :fixed_costs
 
   devise_for :users
 
