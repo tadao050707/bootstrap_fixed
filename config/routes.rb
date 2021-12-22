@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'fixed_costs#index'
+  root 'tops#index'
   resources :fixed_costs
 
   devise_for :users
