@@ -14,8 +14,8 @@
       <%= link_to "ブログ投稿", fixed_costs_path %>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
     <% else %>
-      <%= link_to "新規登録", new_user_registration_path, class: 'btn btn-primary' %>
-      <%= link_to "ログイン", new_user_session_path %>
+      <%= link_to I18n.t('views.messages.sign_up'), new_user_registration_path, class: 'btn btn-primary' %>
+      <%= link_to I18n.t('views.messages.login'), new_user_session_path %>
     <% end %>
 
     <% if notice %>
