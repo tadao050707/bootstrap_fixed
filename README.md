@@ -49,9 +49,7 @@ https://docs.google.com/spreadsheets/d/1p-4gH3VgFhekgX1lC2MiXZKN0wNz557fkK3w08eH
 <br />
 
 ## ER図
-<img width="596" alt="ER3" src="https://user-images.githubusercontent.com/84718987/146544394-d6ba3c23-1c74-44ba-afe2-2b3b3c7da9e7.png">
-
-***
+<img width="467" alt="ER4" src="https://user-images.githubusercontent.com/84718987/147406257-a72e2c73-40c3-4af6-a356-a8c314826171.png">***
 <br />
 
 ## ワイヤーフレーム
