@@ -49,7 +49,7 @@ https://docs.google.com/spreadsheets/d/1p-4gH3VgFhekgX1lC2MiXZKN0wNz557fkK3w08eH
 <br />
 
 ## ER図
-<img width="463" alt="ER5" src="https://user-images.githubusercontent.com/84718987/147410076-761e45be-29d5-45af-9e2a-dfb9f0d7050a.png">
+<img width="466" alt="ER6" src="https://user-images.githubusercontent.com/84718987/147729469-c168b47f-3f63-45c2-ad77-c82b1e882a92.png">
 
 <br />
 
