@@ -207,3 +207,6 @@ ja:
     messages:
       sign_up: "新規作成"
       login: "ログイン"
+    button:
+      monthly: 月額
+  

@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    attributes:
+      fixed_cost:
+        id: ID
+        monthly_annual: 月額・年額
+        payment: 金額
+        content: 詳細
+        created_at: 登録日時
+        updated_at: 更新日時
+      categories:
+        cat_name: カテゴリー
+  enums:
+    fixed_cost:
+      monthly_annual:
+        monthly: 月額
+        annual: 年額

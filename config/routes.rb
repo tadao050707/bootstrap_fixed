@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   root 'tops#index'
   resources :fixed_costs
+  resources :labels, only: %i[new create edit update destroy]
+
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
