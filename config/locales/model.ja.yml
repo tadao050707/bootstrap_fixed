@@ -8,7 +8,7 @@ ja:
         content: 詳細
         created_at: 登録日時
         updated_at: 更新日時
-      categories:
+      category:
         cat_name: カテゴリー
   enums:
     fixed_cost:

@@ -1,7 +1,7 @@
 class CreateCategorizations < ActiveRecord::Migration[6.0]
   def change
     create_table :categorizations do |t|
-      t.references :user, null: false, foreign_key: true
+      #t.references :user, null: false, foreign_key: true
       t.references :category, null: false, foreign_key: true
       t.references :fixed_cost, null: false, foreign_key: true
 

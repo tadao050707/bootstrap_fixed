@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root 'tops#index'
   resources :fixed_costs
-  resources :labels, only: %i[new create edit update destroy]
+  resources :categories
 
 
   devise_for :users, controllers: {

@@ -1,3 +1,27 @@
 <h1>かけいぼ一覧</h1>
 <br>
 <%= link_to "新規作成", new_fixed_cost_path %>
+<br>
+<br>
+<table class="table table-hover table-sm">
+  <thead class="thead-light">
+    <tr>
+      <th>（仮）月額年額</th>
+      <th>金額</th>
+      <th>詳細</th>
+      <th>email</th>
+    </tr>
+  </thead>
+
+  <% @fixed_costs.each do |fixed_cost| %>
+  <tbody class="fixed_cost">
+    <tr>
+      <td><%= fixed_cost.monthly_annual %></td>
+      <td><%= fixed_cost.payment %></td>
+      <td><%= fixed_cost.content %></td>
+      <td><%= fixed_cost.user.email  %></td>
+
+    </tr>
+  </tbody>
+  <% end %>
+</table>

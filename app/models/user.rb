@@ -4,9 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :categorizations, dependent: :destroy
-  has_many :categories, through: :categorizations
-  has_many :fixed_cost, dependent: :destroy
+  # has_many :categorizations, dependent: :destroy
+  # has_many :categories, through: :categorizations
+  has_many :fixed_costs, dependent: :destroy
+  has_many :categories, dependent: :destroy
 
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|

@@ -3,13 +3,17 @@
     <div id="error_explanation">
       <h2><%= @fixed_cost.errors.count %>件のエラーがあります。</h2>
       <ul>
-      <% @fixed_cost.errors.full_messages.each do |msg| %>
+        <% @fixed_cost.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
+  <div class="form-group">
+    <%= form.label :category %>
+    <%= form.collection_select(:category_ids, @categories, :id, :cat_name) %>
+  </div>
   <div class="form-group">
     <%= form.select :monthly_annual, FixedCost.monthly_annuals_i18n.invert %>
   </div>
