@@ -7,7 +7,7 @@ class FixedCostsController < ApplicationController
 
   def new
     @fixed_cost = FixedCost.new
-    @categories = Category.all
+    @categories = current_user.categories.includes(:user)
   end
 
   def create
@@ -15,8 +15,7 @@ class FixedCostsController < ApplicationController
     if @fixed_cost.save
       redirect_to fixed_cost_path(@fixed_cost), notice: "「」登録しました"
     else
-      @categories = Category.all
-
+      @categories = current_user.categories.includes(:user)
       render :new
     end
   end
