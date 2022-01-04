@@ -7,7 +7,6 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-    # @categories = Category.includes(:user)
     @categories = current_user.categories.includes(:user)
   end
 

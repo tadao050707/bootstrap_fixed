@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  validates :cat_name, presence: true, length: { maximum: 8, message: '8文字以内です' }, uniqueness: true
+  validates :cat_name, presence: true, length: { maximum: 10, message: 'は10文字以内で登録してください' }, uniqueness: true
 
   belongs_to :user
   has_many :categorizations, dependent: :destroy

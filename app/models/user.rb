@@ -4,8 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # has_many :categorizations, dependent: :destroy
-  # has_many :categories, through: :categorizations
+  validates :email, length: { maximum: 255, message: 'は255文字以内で登録してください' }
+  validates :name, length: { maximum: 20, message: 'は20文字以内で登録してください' }
+  validates :profile, length: { maximum: 255, message: 'は255文字以内で登録してください' }
+  validates :adult_number, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates :child_number, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+
   has_many :fixed_costs, dependent: :destroy
   has_many :categories, dependent: :destroy
 

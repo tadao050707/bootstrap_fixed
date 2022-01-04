@@ -7,4 +7,9 @@ class FixedCost < ApplicationRecord
 
   enum monthly_annual: { monthly: 0, annual: 1 }
 
+  def payment=(value)
+    value.tr!('０-９', '0-9') if value.is_a?(String)
+    super(value)
+  end
+
 end
