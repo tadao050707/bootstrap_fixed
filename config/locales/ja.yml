@@ -1,6 +1,11 @@
 ---
 ja:
   activerecord:
+    attributes:
+      category:
+        cat_name: "カテゴリー名"
+      fixed_cost:
+        monthly: "月額"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
@@ -207,3 +212,5 @@ ja:
     messages:
       sign_up: "新規作成"
       login: "ログイン"
+    button:
+      monthly: "月額"

@@ -18,6 +18,8 @@ gem 'rexml'
 gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
 
+gem 'enum_help'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -28,6 +30,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener_web'
+  gem 'binding_of_caller'
+  gem 'better_errors'
 end
 
 group :test do
