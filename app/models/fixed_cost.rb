@@ -2,6 +2,7 @@ class FixedCost < ApplicationRecord
   validates :payment, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
   belongs_to :user
+  # has_one :category, dependent: :destroy
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
 
@@ -11,5 +12,4 @@ class FixedCost < ApplicationRecord
     value.tr!('０-９', '0-9') if value.is_a?(String)
     super(value)
   end
-
 end

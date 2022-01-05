@@ -26,6 +26,11 @@ class FixedCostsController < ApplicationController
   def show
   end
 
+  def destroy
+    @fixed_cost.destroy
+    redirect_to fixed_costs_path, notice: "削除しました"
+  end
+
 
   private
   def fixed_cost_params

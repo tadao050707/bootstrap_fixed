@@ -1,4 +1,4 @@
-<h1>かけいぼ一覧</h1>
+<h1>固定支出一覧</h1>
 <br>
 <%= link_to "新規作成", new_fixed_cost_path %>
 <br>
@@ -11,17 +11,22 @@
       <th>金額</th>
       <th>詳細</th>
       <th>email</th>
+      <th></th>
     </tr>
   </thead>
 
   <% @fixed_costs.each do |fixed_cost| %>
   <tbody class="fixed_cost">
     <tr>
+      <% fixed_cost.categories.each do |categories| %>
+        <td><%= categories.cat_name %></td>
+      <% end %>
       <td><%= fixed_cost.monthly_annual %></td>
-      <td><%= fixed_cost.payment %></td>
+      <td><%= fixed_cost.payment %>円</td>
       <td><%= fixed_cost.content %></td>
       <td><%= fixed_cost.user.email  %></td>
-
+      <td><%= link_to '編集', edit_fixed_cost_path(fixed_cost.id), class: 'btn btn-primary' %></td>
+      <td><%= link_to '削除', fixed_cost_path(fixed_cost.id), method: :delete, class: 'btn btn-danger', data: { confirm: "削除していいですか？"} %></td>
     </tr>
   </tbody>
   <% end %>
