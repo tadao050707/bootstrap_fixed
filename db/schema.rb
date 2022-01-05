@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_063644) do
+ActiveRecord::Schema.define(version: 2021_12_30_064535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,17 +20,10 @@ ActiveRecord::Schema.define(version: 2022_01_05_063644) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.bigint "fixed_cost_id"
     t.index ["cat_name"], name: "index_categories_on_cat_name", unique: true
+    t.index ["fixed_cost_id"], name: "index_categories_on_fixed_cost_id"
     t.index ["user_id"], name: "index_categories_on_user_id"
-  end
-
-  create_table "categorizations", force: :cascade do |t|
-    t.bigint "fixed_cost_id", null: false
-    t.bigint "category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_categorizations_on_category_id"
-    t.index ["fixed_cost_id"], name: "index_categorizations_on_fixed_cost_id"
   end
 
   create_table "fixed_costs", force: :cascade do |t|
@@ -61,8 +54,7 @@ ActiveRecord::Schema.define(version: 2022_01_05_063644) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "categories", "fixed_costs"
   add_foreign_key "categories", "users"
-  add_foreign_key "categorizations", "categories"
-  add_foreign_key "categorizations", "fixed_costs"
   add_foreign_key "fixed_costs", "users"
 end

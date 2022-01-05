@@ -12,15 +12,16 @@
       <th>詳細</th>
       <th>email</th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <% @fixed_costs.each do |fixed_cost| %>
   <tbody class="fixed_cost">
     <tr>
-      <% fixed_cost.categories.each do |categories| %>
-        <td><%= categories.cat_name %></td>
-      <% end %>
+    <% fixed_cost.categories.each do |category| %>
+      <td><%= category.cat_name %></td>
+    <% end %>
       <td><%= fixed_cost.monthly_annual %></td>
       <td><%= fixed_cost.payment %>円</td>
       <td><%= fixed_cost.content %></td>
