@@ -1,0 +1,23 @@
+<h1>全員の固定費</h1>
+<br><br>
+
+<table class="table table-hover table-sm">
+  <thead class="thead-light">
+    <tr>
+      <th>名前</th>
+      <th>月額（年額）</th>
+      <th>合計出費</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody class="all_cost">
+    <tr>
+    <% @costs.each do |cost| %>
+      <td><%= cost.user.email %></td>
+      <td><%= cost[1] %>円</td>
+
+    <% end %>
+    </tr>
+  </tbody>
+</table>

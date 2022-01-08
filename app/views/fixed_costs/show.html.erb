@@ -1,2 +1,22 @@
 <h1>FixedCosts#show</h1>
 <p>Find me in app/views/fixed_costs/show.html.erb</p>
+<table>
+  <tr>
+    <th>カテゴリー：</th>
+  <% @fixed_cost.categories.each do |category| %>
+    <td><%= category.cat_name %></td>
+  <% end %>
+  </tr>
+  <tr>
+    <th>（仮）月額：</th>
+    <td><%= @fixed_cost.monthly_annual %></td>
+  </tr>
+  <tr>
+    <th>金額：</th>
+    <td><%= @fixed_cost.payment %>円</td>
+  </tr>
+  <tr>
+    <th>詳細：</th>
+    <td><%= @fixed_cost.content %></td>
+  </tr>
+</table>

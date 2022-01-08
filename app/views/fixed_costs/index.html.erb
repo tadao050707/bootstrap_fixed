@@ -1,7 +1,10 @@
 <h1>固定支出一覧</h1>
 <br>
-<%= link_to "新規作成", new_fixed_cost_path %>
-<br>
+<%= link_to "品目追加", new_fixed_cost_path %>
+<%= link_to "カテゴリ作成", new_category_path %>
+
+<br><br>
+<h3>合計支出：<%= @total_costs %>円</h3>
 <br>
 <table class="table table-hover table-sm">
   <thead class="thead-light">
@@ -19,15 +22,26 @@
   <% @fixed_costs.each do |fixed_cost| %>
   <tbody class="fixed_cost">
     <tr>
-    <% fixed_cost.categories.each do |category| %>
-      <td><%= category.cat_name %></td>
+
+    <% unless fixed_cost.categories.present? %>
+      <td></td>
+    <% else %>
+      <% fixed_cost.categories.each do |category| %>
+        <td><%= category.cat_name %></td>
+      <% end %>
     <% end %>
+
       <td><%= fixed_cost.monthly_annual %></td>
       <td><%= fixed_cost.payment %>円</td>
       <td><%= fixed_cost.content %></td>
       <td><%= fixed_cost.user.email  %></td>
+    <% if fixed_cost.user == current_user %>
       <td><%= link_to '編集', edit_fixed_cost_path(fixed_cost.id), class: 'btn btn-primary' %></td>
       <td><%= link_to '削除', fixed_cost_path(fixed_cost.id), method: :delete, class: 'btn btn-danger', data: { confirm: "削除していいですか？"} %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+    <% end %>
     </tr>
   </tbody>
   <% end %>

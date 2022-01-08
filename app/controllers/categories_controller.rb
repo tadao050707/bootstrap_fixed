@@ -28,9 +28,7 @@ class CategoriesController < ApplicationController
   def update
     @category.update(category_params)
     redirect_to new_category_path, notice: "「#{@category.cat_name}」に変更しました"
-  # else
     render :edit if @category.invalid?
-  # end
   end
 
   def destroy

@@ -1,8 +1,21 @@
 class FixedCostsController < ApplicationController
+  before_action :authenticate_user!, except: [:all_costs]
   before_action :set_fixed_cost, only: %i[show edit update destroy]
+
+  def all_costs
+    @users = User.all
+    @fixed_costs = FixedCost.includes(:user)
+    @costs = FixedCost.group(:user_id).sum(:payment)
+
+  end
 
   def index
     @fixed_costs = FixedCost.includes(:user)
+    @total_costs = current_user.fixed_costs.all.sum(:payment)
+  end
+
+  def show
+    redirect_to fixed_costs_path if @fixed_cost.blank?
   end
 
   def new
@@ -13,7 +26,7 @@ class FixedCostsController < ApplicationController
   def create
     @fixed_cost = current_user.fixed_costs.build(fixed_cost_params)
     if @fixed_cost.save
-      redirect_to fixed_cost_path(@fixed_cost), notice: "「」登録しました"
+      redirect_to fixed_costs_path, notice: "「」登録しました"
     else
       @categories = current_user.categories.includes(:user)
       render :new
@@ -21,14 +34,23 @@ class FixedCostsController < ApplicationController
   end
 
   def edit
+    @categories = current_user.categories.includes(:user)
   end
 
-  def show
+  def update
+    @fixed_cost.update(fixed_cost_params)
+    redirect_to fixed_costs_path, notice: "変更しました"
+    render :edit if @fixed_cost.invalid?
   end
 
   def destroy
-    @fixed_cost.destroy
-    redirect_to fixed_costs_path, notice: "削除しました"
+    if @fixed_cost.destroy
+      flash[:success] = '削除しました。'
+      redirect_to fixed_costs_path
+    else
+      flash[:danger] = '削除に失敗しました。'
+      redirect_to user_path(current_user)
+    end
   end
 
 
