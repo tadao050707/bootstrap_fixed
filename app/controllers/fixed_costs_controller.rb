@@ -10,8 +10,10 @@ class FixedCostsController < ApplicationController
   end
 
   def index
-    @fixed_costs = FixedCost.includes(:user)
-    @total_costs = current_user.fixed_costs.all.sum(:payment)
+    @fixed_costs = current_user.fixed_costs.includes(:user)
+    @total_costs = @fixed_costs.sum(:payment)
+    @monthly_view = false
+    @monthly_view = params[:monthly_view] if params[:monthly_view].present?
   end
 
   def show
