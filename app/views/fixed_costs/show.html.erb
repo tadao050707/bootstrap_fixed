@@ -1,22 +1,66 @@
 <h1>FixedCosts#show</h1>
 <p>Find me in app/views/fixed_costs/show.html.erb</p>
-<table>
-  <tr>
-    <th>カテゴリー：</th>
-  <% @fixed_cost.categories.each do |category| %>
-    <td><%= category.cat_name %></td>
+<h1>固定支出一覧</h1>
+<br>
+<br>
+<%= link_to "品目追加", new_fixed_cost_path %>
+<%= link_to "カテゴリ作成", new_category_path %>
+
+<br><br>
+<h3>合計支出：<%= @total_costs %>円</h3>
+<br>
+<% if @monthly_view == "true" %>
+  <%= link_to "年額表示に切り替え", fixed_cost_path(params[:id], monthly_view: "false") %>
+<% else %>
+  <%= link_to "全てのコストを月額表示に切り替え", fixed_cost_path(params[:id], monthly_view: "true") %>
+<% end %>
+
+<br>
+<table class="table table-hover table-sm">
+  <thead class="thead-light">
+    <tr>
+      <th>カテゴリー</th>
+      <th>（仮）月額年額</th>
+      <th>金額</th>
+      <th>詳細</th>
+      <th>email</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <% @fixed_costs.each do |fixed_cost| %>
+  <tbody class="fixed_cost">
+    <tr>
+
+    <% unless fixed_cost.categories.present? %>
+      <td></td>
+    <% else %>
+      <% fixed_cost.categories.each do |category| %>
+        <td><%= category.cat_name %></td>
+      <% end %>
+    <% end %>
+
+      <% if @monthly_view == "true" && fixed_cost.monthly_annual == "annual" %>
+        <td>monthly</td>
+        <td><%= monthly_payment(fixed_cost) %>円 </td>
+      <% elsif @monthly_view == "false" && fixed_cost.monthly_annual == "monthly" %>
+        <td>annual</td>
+        <td><%= annual_payment(fixed_cost) %>円 </td>
+      <% else %>
+        <td><%= fixed_cost.monthly_annual %></td>
+        <td><%= fixed_cost.payment %>円 </td>
+      <% end %>
+      <td><%= fixed_cost.content %></td>
+      <td><%= fixed_cost.user.email  %></td>
+    <% if fixed_cost.user == current_user %>
+      <td><%= link_to '編集', edit_fixed_cost_path(fixed_cost.id), class: 'btn btn-primary' %></td>
+      <td><%= link_to '削除', fixed_cost_path(fixed_cost.id), method: :delete, class: 'btn btn-danger', data: { confirm: "削除していいですか？"} %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+    <% end %>
+    </tr>
+  </tbody>
   <% end %>
-  </tr>
-  <tr>
-    <th>（仮）月額：</th>
-    <td><%= @fixed_cost.monthly_annual %></td>
-  </tr>
-  <tr>
-    <th>金額：</th>
-    <td><%= @fixed_cost.payment %>円</td>
-  </tr>
-  <tr>
-    <th>詳細：</th>
-    <td><%= @fixed_cost.content %></td>
-  </tr>
 </table>

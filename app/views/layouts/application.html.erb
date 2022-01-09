@@ -12,8 +12,8 @@
   <body>
     <% if user_signed_in? %>
       <%= link_to "ユーザー管理", rails_admin_path if current_user.admin? %>
-      <%= link_to "全員の投稿一覧", all_costs_path %>
-      <%= link_to "ユーザーの固定支出票", fixed_costs_path(current_user.id) %>
+      <%= link_to "全員の投稿一覧", fixed_costs_path %>
+      <%= link_to "あなたの固定支出票", fixed_cost_path(current_user.id) %>
       <%= link_to "マイページ", user_path(current_user.id) %>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
     <% else %>

@@ -1,23 +1,30 @@
 class FixedCostsController < ApplicationController
   before_action :authenticate_user!, except: [:all_costs]
-  before_action :set_fixed_cost, only: %i[show edit update destroy]
+  before_action :set_fixed_cost, only: %i[ edit update destroy ]
 
-  def all_costs
+  def index
+    # @fixed_costs = current_user.fixed_costs.includes(:user)
+    # @total_costs = @fixed_costs.sum(:payment)
+    # @monthly_view = false
+    # @monthly_view = params[:monthly_view] if params[:monthly_view].present?
+
     @users = User.all
     @fixed_costs = FixedCost.includes(:user)
     @costs = FixedCost.group(:user_id).sum(:payment)
-
-  end
-
-  def index
-    @fixed_costs = current_user.fixed_costs.includes(:user)
-    @total_costs = @fixed_costs.sum(:payment)
-    @monthly_view = false
-    @monthly_view = params[:monthly_view] if params[:monthly_view].present?
   end
 
   def show
-    redirect_to fixed_costs_path if @fixed_cost.blank?
+    # redirect_to fixed_costs_path if @fixed_cost.blank?
+    user = User.find_by(id: params[:id])
+    @fixed_costs = user.fixed_costs.includes(:user)
+    @total_costs = @fixed_costs.sum(:payment)
+    # @monthly_view = true
+    # binding.irb
+    if params[:monthly_view].nil?
+      @monthly_view = "true"
+    else
+      @monthly_view = params[:monthly_view]
+    end
   end
 
   def new

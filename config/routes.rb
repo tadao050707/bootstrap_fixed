@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   root 'tops#index'
   resources :fixed_costs
   resources :categories
-  get '/all_costs' => 'fixed_costs#all_costs'
-
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -18,8 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show]
-  get '/mypage' => 'users#mypage'
-
+  # get '/mypage' => 'users#mypage'
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
