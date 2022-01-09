@@ -54,6 +54,6 @@ https://docs.google.com/spreadsheets/d/1p-4gH3VgFhekgX1lC2MiXZKN0wNz557fkK3w08eH
 <br />
 
 ## 画面遷移図
-<img width="464" alt="ER8" src="https://user-images.githubusercontent.com/84718987/148703852-e99c5ed6-fd64-4b3d-bd2f-4931918d9a4a.png">
-***
+<img width="915" alt="senizu" src="https://user-images.githubusercontent.com/84718987/148704161-f3ff566f-a45b-4282-9009-9c064576e8db.png">
+
 <br />
