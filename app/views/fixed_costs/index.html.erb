@@ -6,18 +6,29 @@
     <tr>
       <th>名前</th>
       <th>月額合計出費</th>
-      <td>年額合計金額</td>
-      <td></td>
+      <th>年額合計金額</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody class="all_cost">
-    <% @user.each do |user| %>
+    <% @users.each do |user| %>
+      <% total_annual = [] %>
+      <% total_monthly = [] %>
+      <% user.fixed_costs.each do |fixed_cost| %>
+        <% if fixed_cost.monthly_annual == "annual" %>
+          <% total_annual << fixed_cost.payment %>
+          <% total_monthly << monthly_payment(fixed_cost) %>
+        <% elsif fixed_cost.monthly_annual == "monthly" %>
+          <% total_annual << annual_payment(fixed_cost) %>
+          <% total_monthly << fixed_cost.payment %>
+        <% end %>
+      <% end %>
       <tr>
-        <td><%=  %></td>
-        <td><%= @total_monthly_costs %></td>
-        <td><%= @total_annual_costs %></td>
-        <td><%= link_to "詳細", fixed_cost_path %></td>
+      <td><%= user.email %></td>
+      <td><%= total_monthly.sum %></td>
+      <td><%= total_annual.sum %></td>
+      <td><%= link_to "詳細", fixed_cost_path(user.id) %></td>
       </tr>
     <% end %>
   </tbody>
