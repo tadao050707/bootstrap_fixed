@@ -1,9 +1,9 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ edit update destroy ]
 
-  def index
-    @categories = Category.includes(:user)
-  end
+  # def index
+  #   @categories = Category.includes(:user)
+  # end
 
   def new
     @category = Category.new
@@ -12,6 +12,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = current_user.categories.build(category_params)
+    # @category = current_user.build_category(category_params)
     if @category.valid?
       @category.save
       redirect_to new_category_path, notice: "「#{@category.cat_name}」を作成しました"
@@ -25,11 +26,9 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    if @category.update(category_params)
-      edirect_to new_category_path, notice: "「#{@category.cat_name}」に変更しました"
-    else
-      render :edit
-    end
+    @category.update(category_params)
+    redirect_to new_category_path, notice: "「#{@category.cat_name}」に変更しました"
+    render :edit if @category.invalid?
   end
 
   def destroy

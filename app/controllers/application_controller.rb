@@ -6,6 +6,14 @@ class ApplicationController < ActionController::Base
   # deviseコントローラーにストロングパラメータを追加する
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def monthly_payment(pey)
+    pey.payment/12
+  end
+
+  def annual_payment(pey)
+    pey.payment*12
+  end
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])

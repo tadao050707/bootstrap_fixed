@@ -1,28 +1,35 @@
-<h1>かけいぼ一覧</h1>
-<br>
-<%= link_to "新規作成", new_fixed_cost_path %>
-<br>
-<br>
-<table class="table table-hover table-sm">
+<h1>全員の固定費</h1>
+<br><br>
+
+<table class="table table-sm">
   <thead class="thead-light">
     <tr>
-      <th>カテゴリー</th>
-      <th>（仮）月額年額</th>
-      <th>金額</th>
-      <th>詳細</th>
-      <th>email</th>
+      <th>名前</th>
+      <th>月額合計出費</th>
+      <th>年額合計金額</th>
+      <th></th>
     </tr>
   </thead>
 
-  <% @fixed_costs.each do |fixed_cost| %>
-  <tbody class="fixed_cost">
-    <tr>
-      <td><%= fixed_cost.monthly_annual %></td>
-      <td><%= fixed_cost.payment %></td>
-      <td><%= fixed_cost.content %></td>
-      <td><%= fixed_cost.user.email  %></td>
-
-    </tr>
+  <tbody class="all_cost">
+    <% @users.each do |user| %>
+      <% total_annual = [] %>
+      <% total_monthly = [] %>
+      <% user.fixed_costs.each do |fixed_cost| %>
+        <% if fixed_cost.monthly_annual == "annual" %>
+          <% total_annual << fixed_cost.payment %>
+          <% total_monthly << monthly_payment(fixed_cost) %>
+        <% elsif fixed_cost.monthly_annual == "monthly" %>
+          <% total_annual << annual_payment(fixed_cost) %>
+          <% total_monthly << fixed_cost.payment %>
+        <% end %>
+      <% end %>
+      <tr>
+      <td><%= user.email %></td>
+      <td><%= total_monthly.sum %></td>
+      <td><%= total_annual.sum %></td>
+      <td><%= link_to "詳細", fixed_cost_path(user.id) %></td>
+      </tr>
+    <% end %>
   </tbody>
-  <% end %>
 </table>

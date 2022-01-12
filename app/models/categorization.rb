@@ -1,5 +1,4 @@
 class Categorization < ApplicationRecord
-  #belongs_to :user
   belongs_to :category
-  belongs_to :fixed_cost
+  belongs_to :fixed_cost#, dependent: :destroy
 end

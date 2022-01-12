@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :fixed_costs
   resources :categories
 
-
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     passwords: 'users/passwords'
@@ -16,8 +15,10 @@ Rails.application.routes.draw do
     post 'users/guest_admin_sign_in', to: 'users/sessions#guest_admin_sign_in'
   end
 
+  resources :users, only: [:show]
+  # get '/mypage' => 'users#mypage'
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
-
 end
