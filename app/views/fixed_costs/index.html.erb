@@ -5,19 +5,20 @@
   <thead class="thead-light">
     <tr>
       <th>名前</th>
-      <th>合計出費</th>
+      <th>月額合計出費</th>
+      <td>年額合計金額</td>
       <td></td>
     </tr>
   </thead>
 
   <tbody class="all_cost">
-    <% @costs.each do |cost| %>
-    <tr>
-      <td><%= find_user(cost[0]).email %></td>
-      <td><%= cost[1] %>円</td>
-      <td><%= link_to "詳細", fixed_cost_path(cost[0]) %></td>
-    </tr>
+    <% @user.each do |user| %>
+      <tr>
+        <td><%=  %></td>
+        <td><%= @total_monthly_costs %></td>
+        <td><%= @total_annual_costs %></td>
+        <td><%= link_to "詳細", fixed_cost_path %></td>
+      </tr>
     <% end %>
-
   </tbody>
 </table>
