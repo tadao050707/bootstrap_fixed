@@ -10,11 +10,57 @@ class FixedCostsController < ApplicationController
     user = User.find_by(id: params[:id])
     # user = User.find(params[:id])
     @fixed_costs = user.fixed_costs.includes(:user)
-
     if params[:monthly_view].nil?
       @monthly_view = "true"
     else
       @monthly_view = params[:monthly_view]
+    end
+
+    # @costs = @fixed_costs.joins(:categories).group("categories.cat_name").sum(:payment).sort_by { |_, v| v }.reverse.to_h
+
+    # ここから共通部分
+    # 月額の支出だけまとめる（１）
+    # all_monthlies = @fixed_costs.joins(:categories).where("monthly_annual = ?", 0).group("categories.cat_name").sum(:payment)
+    all_monthlies = @fixed_costs.joins(:categories).where(monthly_annual: 0).group("categories.cat_name").sum(:payment)
+    # 年額の支出だけまとめる（２）
+    all_annuals = @fixed_costs.joins(:categories).where("monthly_annual = ?", 1).group("categories.cat_name").sum(:payment)
+    # ここまで共通部分
+    # binding.pry
+
+    # ここから条件分岐
+    # 月額表示の場合
+    # （２）を月額に変換
+    if @monthly_view == "true"
+      # binding.pry
+      all_annuals = all_annuals.map{|key, value| [key, value/12]}.to_h
+      # （１）と（２）を合計し、月額として@costsに代入
+      @costs = all_monthlies.merge(all_annuals){|key, v1, v2| v1 + v2}.sort_by { |_, v| v }.reverse
+    # binding.pry
+    else
+    # 年額表示の場合
+      # （１）を年額に変換
+      # all_annuals = all_annuals.map{|key, value| [key, value*12]}.to_h
+      all_monthlies = all_monthlies.map{|key, value| [key, value*12]}.to_h
+
+      # （１）と（２）を合計し、月額として@costsに代入
+      # binding.pry
+      @costs = all_monthlies.merge(all_annuals){|key, v1, v2| v1 + v2}.sort_by { |_, v| v }.reverse
+      # binding.pry
+    end
+
+
+    @total_annual = []
+    @total_monthly = []
+    @fixed_costs.each do |fixed_cost|
+      if @monthly_view == "true" && fixed_cost.monthly_annual == "annual"
+        @total_monthly << monthly_payment(fixed_cost)
+      elsif @monthly_view == "true" && fixed_cost.monthly_annual == "monthly"
+        @total_monthly << fixed_cost.payment
+      elsif @monthly_view == "false" && fixed_cost.monthly_annual == "monthly"
+        @total_annual << annual_payment(fixed_cost)
+      else
+        @total_annual << fixed_cost.payment
+      end
     end
   end
 
@@ -27,7 +73,7 @@ class FixedCostsController < ApplicationController
     @fixed_cost = current_user.fixed_costs.build(fixed_cost_params)
     if @fixed_cost.save
       # binding.pry
-      redirect_to fixed_cost_path(current_user), notice: "新しく「#{@fixed_cost.categories.map(&:cat_name)}」を登録しました"
+      redirect_to fixed_cost_path(current_user), notice: "新しく「#{@fixed_cost.categories.map(&:cat_name).first}」を登録しました"
     else
       @categories = current_user.categories.includes(:user)
       render :new
