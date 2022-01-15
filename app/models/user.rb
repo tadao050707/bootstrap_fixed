@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :fixed_costs, dependent: :destroy
   has_many :categories, dependent: :destroy
 
+  mount_uploader :image, ImageUploader
+
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -29,7 +31,7 @@ class User < ApplicationRecord
 
 
   attr_accessor :current_password
-  
+
   def update_without_current_password(params, *options)
     params.delete(:current_password)
 

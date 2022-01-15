@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     # アカウント編集の時にnameとprofileのストロングパラメータを追加
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[ name profile image adult_number child_number])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[ name profile image image_cache adult_number child_number])
   end
 end
