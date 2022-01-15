@@ -19,6 +19,9 @@ gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
 
 gem 'enum_help'
+gem "chartkick"
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
