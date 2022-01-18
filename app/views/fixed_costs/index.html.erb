@@ -5,8 +5,8 @@
   <thead class="thead-light">
     <tr>
       <th>名前</th>
-      <th>月額合計出費</th>
-      <th>年額合計金額</th>
+      <th>月額合計支出</th>
+      <th>年間合計支出</th>
       <th></th>
     </tr>
   </thead>
@@ -28,7 +28,7 @@
       <td><%= user.email %></td>
       <td><%= total_monthly.sum %></td>
       <td><%= total_annual.sum %></td>
-      <td><%= link_to "詳細", fixed_cost_path(user.id) %></td>
+      <td><%= link_to "詳細", user_path(user.id) %></td>
       </tr>
     <% end %>
   </tbody>
