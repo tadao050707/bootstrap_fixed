@@ -2,12 +2,14 @@
 <p>Find me in app/views/fixed_costs/show.html.erb</p>
 <h1>固定支出一覧</h1>
 <br><br>
-<%= link_to "品目追加", new_fixed_cost_path, class:"btn btn-success" %>
-<%= link_to "カテゴリ作成", new_category_path,class: "btn btn-secondary" %>
+
+<% if current_user.id == @user.id %>
+  <%= link_to "品目追加", new_fixed_cost_path, class:"btn btn-success" %>
+  <%= link_to "カテゴリ作成", new_category_path,class: "btn btn-secondary" %>
+<% end %>
 
 <%= pie_chart @costs, donut: true, suffix: "円" %>
-<!-- <%= pie_chart @fixed_costs.group(:payment).count %> -->
-<!-- <%= pie_chart @fixed_costs,library: {title: {text: "支出<br>#{@total_monthly.sum}円 "}} %> -->
+<!-- <%= pie_chart @costs,library: {title: {text: "支出<br>#{@total_monthly.sum}円 "}} %> -->
 
 <br><br>
 <!--
