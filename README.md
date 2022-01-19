@@ -18,7 +18,7 @@ $ rails s
 <br />
 
 ## 就業Termの技術
-* devise
+* devise_
 * Ajaxを使ったコメント機能
 ***
 <br />
