@@ -18,7 +18,7 @@ $ rails s
 <br />
 
 ## 就業Termの技術
-* devise
+* devise_
 * Ajaxを使ったコメント機能
 ***
 <br />
@@ -49,7 +49,7 @@ https://docs.google.com/spreadsheets/d/1p-4gH3VgFhekgX1lC2MiXZKN0wNz557fkK3w08eH
 <br />
 
 ## ER図
-<img width="497" alt="ER7" src="https://user-images.githubusercontent.com/84718987/148051638-f00e691a-e99d-441f-81de-7634971d5491.png">
+<img width="481" alt="ER9" src="https://user-images.githubusercontent.com/84718987/150064188-0f9fb5f9-ebdb-4a1b-b550-0fdd922c6422.png">
 
 <br />
 
