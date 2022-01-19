@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     post 'users/guest_admin_sign_in', to: 'users/sessions#guest_admin_sign_in'
   end
 
-  resources :users, only: [:show] do
+  resources :users, only: %i[show edit update] do
     resources :comments
   end
   # get '/mypage' => 'users#mypage'
