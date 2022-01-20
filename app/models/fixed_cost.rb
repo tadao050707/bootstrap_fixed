@@ -1,5 +1,5 @@
 class FixedCost < ApplicationRecord
-  validates :payment, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  validates :payment, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9999999}
 
   belongs_to :user
   has_many :categorizations, dependent: :destroy

@@ -46,7 +46,8 @@ class FixedCostsController < ApplicationController
 
   def create
     @fixed_cost = current_user.fixed_costs.build(fixed_cost_params)
-    if @fixed_cost.save
+    if @fixed_cost.valid?
+      @fixed_cost.save
       # binding.pry
       redirect_to fixed_cost_path(current_user), notice: "新しく「#{@fixed_cost.categories.map(&:cat_name).first}」を登録しました"
     else
