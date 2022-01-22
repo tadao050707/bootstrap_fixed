@@ -13,7 +13,7 @@
 <h3>プロフィール</h3>
 <%= @user.profile%>
 <br><br>
-<%= link_to "ユーザー情報編集",edit_user_registration_path %>
+<%= link_to "ユーザー情報の編集",edit_user_registration_path if current_user.id == @user.id %>
 
 <br><br><br>
 <h1>固定支出一覧</h1>
@@ -71,16 +71,14 @@
     </tr>
   </thead>
 
-  <% @fixed_costs.each do |fixed_cost| %><!-- userのfixed_costテーブル中身 -->
+  <% @fixed_costs.includes(:categories).each do |fixed_cost| %><!-- userのfixed_costテーブル中身 -->
   <tbody class="fixed_cost">
     <tr>
 
     <% unless fixed_cost.categories.present? %>
       <td></td>
     <% else %>
-      <% fixed_cost.categories.each do |category| %>
-        <td><%= category.cat_name %></td>
-      <% end %>
+      <td><%= fixed_cost.categories.map(&:cat_name).first %></td>
     <% end %>
 
     <% if @monthly_view == "true" && fixed_cost.monthly_annual == "annual" %>

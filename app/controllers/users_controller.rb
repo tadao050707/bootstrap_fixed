@@ -4,10 +4,15 @@ class UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    @fixed_costs = user.fixed_costs.includes(:user)
-
+    # @fixed_costs = user.fixed_costs.includes(:user)
+    # binding.pry
+    # @fixed_costs = FixedCost.all.includes(user: [:categories])
+    @fixed_costs = user.fixed_costs.includes(user: [:categories])
+    # @fixed_costs = @fixed_costs.eager_load(:monthly_annual)
     @comments = @user.comments
     @comment = @user.comments.build
+    # params[:monthly_view] ? @monthly_view = "true" : params[:monthly_view]
+
     if params[:monthly_view].nil?
       @monthly_view = "true"
     else
