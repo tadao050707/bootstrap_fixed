@@ -5,7 +5,7 @@
       <div class="comment-content" id ="this_comment_<%= comment.id %>"></div>
       <p><%= comment.content %></p>
       <p>
-      <%= User.find(comment.send_user).email %>さんの投稿
+      <%= User.find(comment.send_user).name %>さんの投稿
       投稿日：<%= l comment.created_at, format: :long %>
       </p>
 

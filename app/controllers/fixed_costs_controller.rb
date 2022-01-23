@@ -15,8 +15,6 @@ class FixedCostsController < ApplicationController
     else
       @monthly_view = params[:monthly_view]
     end
-
-    # @costs = @fixed_costs.joins(:categories).group("categories.cat_name").sum(:payment).sort_by { |_, v| v }.reverse.to_h
     # まず月額の支出だけまとめる（１）
     # all_monthlies = @fixed_costs.joins(:categories).where("monthly_annual = ?", 0).group("categories.cat_name").sum(:payment)
     all_monthlies = @fixed_costs.joins(:categories).where(monthly_annual: 0).group("categories.cat_name").sum(:payment)

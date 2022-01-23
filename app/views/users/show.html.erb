@@ -82,18 +82,19 @@
     <% end %>
 
     <% if @monthly_view == "true" && fixed_cost.monthly_annual == "annual" %>
-      <td>monthly</td>
+      <td><%= I18n.t('views.words.monthly') %></td>
       <td><%= monthly_payment(fixed_cost) %>円 </td>
     <% elsif @monthly_view == "false" && fixed_cost.monthly_annual == "monthly" %>
-      <td>annual</td>
+      <td><%= I18n.t('views.words.annual') %></td>
       <td><%= annual_payment(fixed_cost) %>円 </td>
     <% else %>
-      <td><%= fixed_cost.monthly_annual %></td>
+      <td><%= fixed_cost.monthly_annual_i18n %></td>
       <td><%= fixed_cost.payment %>円 </td>
     <% end %>
 
       <td><%= fixed_cost.content %></td>
-      <td><%= fixed_cost.user.email  %></td>
+      <td><%= fixed_cost.user.name  %></td>
+
     <% if fixed_cost.user == current_user %>
       <td><%= link_to '編集', edit_fixed_cost_path(fixed_cost.id), class: 'btn btn-primary btn-sm' %></td>
       <td><%= link_to '削除', fixed_cost_path(fixed_cost.id), method: :delete, class: 'btn btn-danger btn-sm', data: { confirm: "削除していいですか？"} %></td>
@@ -101,6 +102,7 @@
       <td></td>
       <td></td>
     <% end %>
+
     </tr>
   </tbody>
   <% end %>
@@ -108,8 +110,8 @@
 
 <br><br>
 <p>コメント一覧</p>
-  <div id="comments_area">
-    <%= render partial: 'comments/index', locals: { comments: @comments, user: @user } %>
-  </div>
-  <%= render partial: 'comments/form', locals: { comment: @comment, user: @user } %>
-  <%= link_to '戻る' %>
+<div id="comments_area">
+  <%= render partial: 'comments/index', locals: { comments: @comments, user: @user } %>
+</div>
+<%= render partial: 'comments/form', locals: { comment: @comment, user: @user } %>
+<%= link_to '戻る' %>

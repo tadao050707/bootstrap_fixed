@@ -6,6 +6,10 @@ ja:
         cat_name: "カテゴリー名"
       fixed_cost:
         monthly: "月額"
+        category: カテゴリー
+        monthly_annual:
+      user:
+        monthly: "月額"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
@@ -213,5 +217,9 @@ ja:
     messages:
       sign_up: "新規作成"
       login: "ログイン"
+      monthly: "月額"
     button:
       monthly: "月額"
+    words:
+      monthly: "月額"
+      annual: "年額"
