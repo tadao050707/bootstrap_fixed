@@ -2,18 +2,17 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, password_length: 6..128
 
-  validates :email, length: { maximum: 255, message: 'は255文字以内で登録してください' }
-  validates :name, presence: true, length: { maximum: 20, message: 'は20文字以内で登録してください' }
-  validates :profile, length: { maximum: 255, message: 'は255文字以内で登録してください' }
+  validates :email, length: { maximum: 100, message: 'は100文字以下で登録してください' }
+  validates :name, presence: true, length: { maximum: 20, message: 'は20文字以下で登録してください' }
+  validates :profile, length: { maximum: 255, message: 'は255文字以下で登録してください' }
   validates :adult_number, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
   validates :child_number, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
   has_many :fixed_costs, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :comments, dependent: :destroy
-
 
   mount_uploader :image, ImageUploader
 
