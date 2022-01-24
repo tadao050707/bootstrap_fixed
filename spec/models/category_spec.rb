@@ -4,8 +4,8 @@ RSpec.describe Category, type: :model do
   let(:user) { FactoryBot.create(:user) }
   let(:user2) { FactoryBot.create(:user2)}
 
-  describe 'カテゴリー入力数のテスト' do
-    context 'カテゴリー数が11字以上の場合' do
+  describe 'カテゴリー入力のテスト' do
+    context 'カテゴリーの字数が11字以上の場合' do
       it 'バリデーションエラーになる' do
         category = Category.new(cat_name: 'a' * 11,  user: user)
         expect(category).to be_invalid
