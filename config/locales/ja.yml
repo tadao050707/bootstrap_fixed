@@ -215,9 +215,11 @@ ja:
     pm: 午後
   views:
     messages:
-      sign_up: "新規作成"
+      sign_up: "新規アカウント登録"
       login: "ログイン"
+      logout: "ログアウト"
       monthly: "月額"
+      start: "ここから"
     button:
       monthly: "月額"
     words:

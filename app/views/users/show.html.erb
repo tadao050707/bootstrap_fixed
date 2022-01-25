@@ -1,19 +1,17 @@
-<h2><%= @user.email %>さんのユーザーページ</h2>
+<h2><%= @user.name %>さんのユーザーページ</h2>
 <br>
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @user.image.url if @user.image && @user.image.url %>
-</p>
-<h3>ユーザー名</h3>
-<%= @user.name %>
-<br>
-<h3>メールアドレス（後で消す）</h3>
-<%= @user.email %>
-<br>
-<h3>プロフィール</h3>
-<%= @user.profile%>
+<%= link_to "マイページ", mypage_user_path %>
 <br><br>
-<%= link_to "ユーザー情報の編集",edit_user_registration_path if current_user.id == @user.id %>
+  <% if @user.image.present? %>
+    <p>
+      <strong>Image:</strong>
+      <%= image_tag @user.image.url if @user.image && @user.image.url %>
+    </p>
+  <% end %>
+  <br>
+  <h4>プロフィール</h4>
+  <%= @user.profile%>
+  <br><br>
 
 <br><br><br>
 <h1>固定支出一覧</h1>

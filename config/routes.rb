@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root 'tops#index'
-  resources :fixed_costs do
-    resources :comments
-  end
+  resources :fixed_costs, except: [:show]
   resources :categories
 
   devise_for :users, controllers: {
@@ -19,8 +17,10 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show edit update] do
     resources :comments
+    member do
+      get 'mypage'
+    end
   end
-  # get '/mypage' => 'users#mypage'
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

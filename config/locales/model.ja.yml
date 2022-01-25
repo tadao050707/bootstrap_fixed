@@ -10,3 +10,5 @@ ja:
         updated_at: 更新日時
       category:
         cat_name: カテゴリー
+      comment:
+        content: コメント
