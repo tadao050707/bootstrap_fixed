@@ -1,15 +1,12 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!#, only: [:create]
   before_action :set_user, only: [:create, :edit, :update]
 
   def create
     @comment = @user.comments.build(comment_params)
     @comment.send_user = current_user.id
-    # @comment.user_id = current_user.id
-    # binding.pry
     respond_to do |format|
       if @comment.save
-        # format.html { redirect_to user_path(@comment) }
         format.js { render :index }
       else
         format.html { redirect_to user_path(@comment), notice: "投稿できませんでした"}

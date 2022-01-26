@@ -1,13 +1,9 @@
-<h1>全員の固定費</h1>
-<br><br>
-
 <table class="table table-sm">
   <thead class="thead-light">
     <tr>
       <th>名前</th>
       <th>月額合計支出</th>
       <th>年間合計支出</th>
-      <th></th>
     </tr>
   </thead>
 
@@ -25,10 +21,9 @@
         <% end %>
       <% end %>
       <tr>
-      <td><%= user.email %></td>
+      <td><%= link_to "#{user.name}", user_path(user.id) %></td>
       <td><%= total_monthly.sum %></td>
       <td><%= total_annual.sum %></td>
-      <td><%= link_to "詳細", user_path(user.id) %></td>
       </tr>
     <% end %>
   </tbody>
