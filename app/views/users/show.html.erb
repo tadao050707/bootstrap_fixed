@@ -1,19 +1,17 @@
-<h2><%= @user.email %>さんのユーザーページ</h2>
+<h2><%= @user.name %>さんのユーザーページ</h2>
 <br>
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @user.image.url if @user.image && @user.image.url %>
-</p>
-<h3>ユーザー名</h3>
-<%= @user.name %>
-<br>
-<h3>メールアドレス（後で消す）</h3>
-<%= @user.email %>
-<br>
-<h3>プロフィール</h3>
-<%= @user.profile%>
+<%= link_to "マイページ", mypage_user_path %>
 <br><br>
-<%= link_to "ユーザー情報編集",edit_user_registration_path %>
+  <% if @user.image.present? %>
+    <p>
+      <strong>Image:</strong>
+      <%= image_tag @user.image.url if @user.image && @user.image.url %>
+    </p>
+  <% end %>
+  <br>
+  <h4>プロフィール</h4>
+  <%= @user.profile%>
+  <br><br>
 
 <br><br><br>
 <h1>固定支出一覧</h1>
@@ -62,40 +60,37 @@
   <thead class="thead-light">
     <tr>
       <th>カテゴリー</th>
-      <th>（仮）月額年額</th>
+      <th></th>
       <th>金額</th>
       <th>詳細</th>
-      <th>email</th>
       <th></th>
       <th></th>
     </tr>
   </thead>
 
-  <% @fixed_costs.each do |fixed_cost| %><!-- userのfixed_costテーブル中身 -->
+  <% @fixed_costs.includes(:categories).each do |fixed_cost| %><!-- userのfixed_costテーブル中身 -->
   <tbody class="fixed_cost">
     <tr>
 
     <% unless fixed_cost.categories.present? %>
       <td></td>
     <% else %>
-      <% fixed_cost.categories.each do |category| %>
-        <td><%= category.cat_name %></td>
-      <% end %>
+      <td><%= fixed_cost.categories.map(&:cat_name).first %></td>
     <% end %>
 
     <% if @monthly_view == "true" && fixed_cost.monthly_annual == "annual" %>
-      <td>monthly</td>
+      <td><%= I18n.t('views.words.monthly') %></td>
       <td><%= monthly_payment(fixed_cost) %>円 </td>
     <% elsif @monthly_view == "false" && fixed_cost.monthly_annual == "monthly" %>
-      <td>annual</td>
+      <td><%= I18n.t('views.words.annual') %></td>
       <td><%= annual_payment(fixed_cost) %>円 </td>
     <% else %>
-      <td><%= fixed_cost.monthly_annual %></td>
+      <td><%= fixed_cost.monthly_annual_i18n %></td>
       <td><%= fixed_cost.payment %>円 </td>
     <% end %>
 
       <td><%= fixed_cost.content %></td>
-      <td><%= fixed_cost.user.email  %></td>
+
     <% if fixed_cost.user == current_user %>
       <td><%= link_to '編集', edit_fixed_cost_path(fixed_cost.id), class: 'btn btn-primary btn-sm' %></td>
       <td><%= link_to '削除', fixed_cost_path(fixed_cost.id), method: :delete, class: 'btn btn-danger btn-sm', data: { confirm: "削除していいですか？"} %></td>
@@ -103,6 +98,7 @@
       <td></td>
       <td></td>
     <% end %>
+
     </tr>
   </tbody>
   <% end %>
@@ -110,8 +106,8 @@
 
 <br><br>
 <p>コメント一覧</p>
-  <div id="comments_area">
-    <%= render partial: 'comments/index', locals: { comments: @comments, user: @user } %>
-  </div>
-  <%= render partial: 'comments/form', locals: { comment: @comment, user: @user } %>
-  <%= link_to '戻る' %>
+<div id="comments_area">
+  <%= render partial: 'comments/index', locals: { comments: @comments, user: @user } %>
+</div>
+<%= render partial: 'comments/form', locals: { comment: @comment, user: @user } %>
+<%= link_to '戻る' %>

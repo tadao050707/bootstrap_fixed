@@ -3,11 +3,11 @@ module FixedCostsHelper
     User.find(user_id)
   end
 
-  def monthly_payment(pey)
-    pey.payment/12
+  def monthly_payment(pay)
+    pay.payment/12
   end
 
-  def annual_payment(pey)
-    pey.payment*12
+  def annual_payment(pay)
+    pay.payment*12
   end
 end

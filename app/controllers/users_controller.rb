@@ -1,13 +1,19 @@
 class UsersController < ApplicationController
-  # before_action :authenticate_user!, only: [:mypage]
+  before_action :authenticate_user!
   before_action :set_user, only: %i[ show mypage edit update ]
+
+  def mypage
+    redirect_to user_path(current_user) unless current_user.id == @user.id
+  end
 
   def show
     user = User.find(params[:id])
-    @fixed_costs = user.fixed_costs.includes(:user)
-
+    @fixed_costs = user.fixed_costs.includes(user: [:categories])
+    # @fixed_costs = @fixed_costs.eager_load(:monthly_annual)
     @comments = @user.comments
     @comment = @user.comments.build
+    # params[:monthly_view] ? @monthly_view = "true" : params[:monthly_view]
+
     if params[:monthly_view].nil?
       @monthly_view = "true"
     else
@@ -36,10 +42,6 @@ class UsersController < ApplicationController
       @costs = all_monthlies.merge(all_annuals){|key, v1, v2| v1 + v2}.sort_by { |_, v| v }.reverse
     end
   end
-
-  # def mypage
-  #   #redirect_to user_path(current_user)
-  # end
 
   def edit
     redirect_to user_path(@user) unless @user == current_user

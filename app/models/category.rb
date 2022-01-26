@@ -3,6 +3,7 @@ class Category < ApplicationRecord
              uniqueness: { scope: :user_id }
 
   belongs_to :user
+  # has_many :fixid_costs, through: :categorizations
   has_many :categorizations, dependent: :destroy
-  has_many :fixid_costs, through: :categorizations
+  has_many :fixed_costs, through: :categorizations
 end
