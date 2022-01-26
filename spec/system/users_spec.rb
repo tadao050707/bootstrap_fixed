@@ -16,6 +16,7 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content 'アカウント登録が完了しました。'
       end
     end
+    
   end
 
 end

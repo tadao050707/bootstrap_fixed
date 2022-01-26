@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <%= link_to "倹約アプリ", root_path %>
     <% if user_signed_in? %>
       <%= link_to "ユーザー管理", rails_admin_path if current_user.admin? %>
       <%= link_to "みんなの投稿", fixed_costs_path %>

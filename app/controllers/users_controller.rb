@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :authenticate_user!, only: [:mypage]
+  before_action :authenticate_user!
   before_action :set_user, only: %i[ show mypage edit update ]
 
   def mypage

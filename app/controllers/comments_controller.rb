@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!#, only: [:create]
   before_action :set_user, only: [:create, :edit, :update]
 
   def create

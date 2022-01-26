@@ -60,10 +60,9 @@
   <thead class="thead-light">
     <tr>
       <th>カテゴリー</th>
-      <th>（仮）月額年額</th>
+      <th></th>
       <th>金額</th>
       <th>詳細</th>
-      <th>email</th>
       <th></th>
       <th></th>
     </tr>
@@ -91,7 +90,6 @@
     <% end %>
 
       <td><%= fixed_cost.content %></td>
-      <td><%= fixed_cost.user.name  %></td>
 
     <% if fixed_cost.user == current_user %>
       <td><%= link_to '編集', edit_fixed_cost_path(fixed_cost.id), class: 'btn btn-primary btn-sm' %></td>
