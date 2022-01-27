@@ -1,9 +1,45 @@
-# require 'rails_helper'
-#
-# RSpec.describe "Categories", type: :system do
-#   before do
-#     driven_by(:rack_test)
-#   end
-#
-#   pending "add some scenarios (or delete) #{__FILE__}"
-# end
+require 'rails_helper'
+
+RSpec.describe "Categories", type: :system do
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:user2) { FactoryBot.create(:user2) }
+  let!(:category) { FactoryBot.create(:category, user: user) }
+  let!(:category2) { FactoryBot.create(:category2, user: user) }
+
+  describe 'カテゴリーCRUD機能' do
+    before do
+      visit new_user_session_path
+      fill_in 'メールアドレス', with: login_user.email
+      fill_in 'パスワード', with: login_user.password
+      click_button 'ログイン'
+      visit new_category_path
+    end
+    let!(:login_user) { user }
+
+    context 'ユーザーがカテゴリーを作成した時' do
+      it '新しいカテゴリーが作成される' do
+        fill_in 'カテゴリー名', with: 'サブスクリプション'
+        click_button '作成する'
+        expect(page).to have_content 'サブスクリプション'
+        expect(current_path).to eq new_category_path
+      end
+    end
+    context 'カテゴリー編集をした時' do
+      it '編集できる' do
+        # click_on '編集'
+        all('tbody td')[1].click_on '編集'
+        fill_in 'カテゴリー名', with: '編集したカテゴリー'
+        click_on '変更する'
+        expect(page).to have_content '変更しました'
+      end
+    end
+    context 'カテゴリーを削除した時' do
+      it '削除される' do
+        # binding.pry
+        all('tbody td')[2].click_on '削除'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content '削除しました'
+      end
+    end
+  end
+end

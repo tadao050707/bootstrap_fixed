@@ -3,7 +3,7 @@
 <%= render 'form' %>
 <br>
 <% @categories.each do |category| %>
-  <table>
+  <table class="category">
     <tr>
       <td><%= category.cat_name %></td>
       <td><%= link_to "編集", edit_category_path(category.id), class: 'btn btn-primary btn-sm' %></td>

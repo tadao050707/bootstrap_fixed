@@ -43,8 +43,6 @@ RSpec.describe "Users", type: :system do
       visit new_user_session_path
       fill_in 'メールアドレス', with: login_user.email
       fill_in 'パスワード', with: login_user.password
-      # fill_in 'メールアドレス', with: user.email
-      # fill_in 'パスワード', with: user.password
       click_button 'ログイン'
     end
     let(:login_user) { user }
