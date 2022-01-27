@@ -2,18 +2,18 @@
 <br>
 <%= link_to "マイページ", mypage_user_path %>
 <br><br>
-  <% if @user.image.present? %>
-    <p>
-      <strong>Image:</strong>
-      <%= image_tag @user.image.url if @user.image && @user.image.url %>
-    </p>
-  <% end %>
-  <br>
-  <h4>プロフィール</h4>
-  <%= @user.profile%>
-  <br><br>
+<% if @user.image.present? %>
+  <p>
+    <strong>Image:</strong>
+    <%= image_tag @user.image.url if @user.image && @user.image.url %>
+  </p>
+<% end %>
+<br>
+<h4>プロフィール</h4>
+<%= @user.profile%>
 
-<br><br><br>
+
+<br><br>
 <h1>固定支出一覧</h1>
 <br><br>
 
@@ -32,7 +32,6 @@
 <%= pie_chart @costs,library: {title: {text: "支出<br>#{@total_monthly.sum}円 "}} %>
 <% end %>
 
-<br><br>
 <% total_annual = [] %>
 <% total_monthly = [] %>
 <% @fixed_costs.each do |fixed_cost| %>
@@ -104,7 +103,7 @@
   <% end %>
 </table>
 
-<br><br>
+<hr>
 <p>コメント一覧</p>
 <div id="comments_area">
   <%= render partial: 'comments/index', locals: { comments: @comments, user: @user } %>
