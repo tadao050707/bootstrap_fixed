@@ -12,18 +12,51 @@
   </head>
 
   <body>
-    
-    <%= link_to "倹約アプリ", root_path %>
-    <% if user_signed_in? %>
-      <%= link_to "みんなの投稿", fixed_costs_path %>
-      <%= link_to "固定支出表", user_path(current_user.id) %>
-      <%= link_to "マイページ", mypage_user_path(current_user.id) %>
-      <%= link_to I18n.t('views.messages.logout'), destroy_user_session_path, method: :delete %>
-      <%= link_to "管理者画面", rails_admin_path if current_user.admin? %>
-    <% else %>
-    <%= link_to I18n.t('views.messages.login'), new_user_session_path %>
-      <%= link_to I18n.t('views.messages.sign_up'), new_user_registration_path, class: 'btn btn-primary' %>
-    <% end %>
+    <nav class="navbar navbar-fixed-top navbar-inverse navbar-expand-md navbar-expand-lg">
+    <!-- <nav class="navbar navbar-light bg-light navbar-expand-md"> -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-expand-md"> -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-info"> -->
+      <div class="container">
+          <!-- 追記ここから-->
+        <div class="navbar-header">
+
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <% if user_signed_in? %>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <% if current_user.admin? %>
+                <span class="icon-bar"></span>
+              <% end %>
+            <% else %>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            <% end %>
+          </button>
+          <!-- 追記ここまで-->
+          <%= link_to "倹約アプリ(ロゴ)", root_path, id: "logo" %>
+            <!-- 追記ここから-->
+        </div>
+          <!-- 追記ここまで -->
+        <nav>
+          <!-- ulタグ内に「id="navbar"」を追記、classに「navbar-collapse collapse」を追記 -->
+          <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
+            <% if user_signed_in? %>
+              <li><%= link_to "みんなの投稿", fixed_costs_path %></li>
+              <li><%= link_to "固定支出表", user_path(current_user.id) %></li>
+              <li><%= link_to "マイページ", mypage_user_path(current_user.id) %></li>
+              <li><%= link_to I18n.t('views.messages.logout'), destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to "管理者画面", rails_admin_path if current_user.admin? %></li>
+            <% else %>
+              <li><%= link_to I18n.t('views.messages.login'), new_user_session_path %></li>
+              <li><%= link_to I18n.t('views.messages.sign_up'), new_user_registration_path, class: 'btn btn-primary' %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </nav>
 
     <% if notice %>
       <p class="alert alert-notice"><%= notice %></p>
@@ -35,7 +68,7 @@
     <%= yield %>
 
     <footer class="footer">
-      <p>© 2022 footer</p>
+      <p>©2022 Frugality</p>
     </footer>
 
   </body>
