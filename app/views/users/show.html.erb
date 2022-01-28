@@ -1,17 +1,13 @@
-<h2><%= @user.name %>さんのユーザーページ</h2>
+<h2><%= image_tag @user.image.url, class: "rounded-circle" if @user.image && @user.image.url || @user.image.present? %>
+<%= @user.name %>さんの固定支出</h2>
 <br>
-<%= link_to "マイページ", mypage_user_path %>
+<%= link_to "マイページ", mypage_user_path if current_user.id == @user.id %>
 <br><br>
-<% if @user.image.present? %>
-  <p>
-    <strong>Image:</strong>
-    <%= image_tag @user.image.url if @user.image && @user.image.url %>
-  </p>
-<% end %>
+<% if current_user.id != @user.id %>
 <br>
 <h4>プロフィール</h4>
-<%= @user.profile%>
-
+<%= @user.profile %>
+<% end %>
 
 <br><br>
 <h1>固定支出一覧</h1>

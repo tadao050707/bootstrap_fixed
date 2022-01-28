@@ -49,7 +49,7 @@ RSpec.describe "FixedCosts", type: :system do
         all('tbody td')[5].click_on '削除'
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content '削除しました'
-        binding.pry
+        # binding.pry
       end
     end
   end
