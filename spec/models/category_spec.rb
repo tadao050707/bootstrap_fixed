@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user1) }
   let(:user2) { FactoryBot.create(:user2)}
 
   describe 'カテゴリー入力のテスト' do

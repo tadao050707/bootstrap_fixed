@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     @comment.send_user = current_user.id
     respond_to do |format|
       if @comment.save
+        flash.now[:notice] = 'コメント投稿しました'
         format.js { render :index }
       else
         format.html { redirect_to user_path(@comment), notice: "投稿できませんでした"}
@@ -17,7 +18,7 @@ class CommentsController < ApplicationController
   def edit
     @comment = @user.comments.find(params[:id])
     respond_to do |format|
-      flash.now[:notice] = 'コメントの編集中'
+      # flash.now[:notice] = 'コメント内容を変更しました'
       format.js { render :edit }
     end
   end
@@ -26,7 +27,7 @@ class CommentsController < ApplicationController
     @comment = @user.comments.find(params[:id])
       respond_to do |format|
         if @comment.update(comment_params)
-          flash.now[:notice] = 'コメントが編集されました'
+          flash.now[:notice] = 'コメント内容を変更しました'
           format.js { render :index }
         else
           flash.now[:notice] = 'コメントの編集に失敗しました'
@@ -39,10 +40,11 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
     respond_to do |format|
-      flash.now[:notice] = 'コメントが削除されました'
+      flash.now[:notice] = 'コメントを削除しました'
       format.js { render :index }
     end
   end
+
 
   private
 

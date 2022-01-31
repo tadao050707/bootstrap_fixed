@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:user) { FactoryBot.create(:user1) }
   let!(:user2) { FactoryBot.create(:user2) }
 
   describe '新規ユーザー登録' do
@@ -19,7 +19,7 @@ RSpec.describe "Users", type: :system do
     context 'ログインまたは登録しないでユーザの詳細画面を「クリック」した場合' do
       it 'ユーザーログイン画面へ遷移する' do
         visit root_path
-        click_on "みんなの固定費"
+        click_on "みんなの固定支出はこちらからみれます"
         click_on "テストユーザー２"
         expect(page).to have_selector '.alert', text: 'アカウント登録もしくはログインしてください。'
       end
@@ -41,13 +41,11 @@ RSpec.describe "Users", type: :system do
   describe 'ユーザー機能のテスト' do
     before do
       visit new_user_session_path
-      fill_in 'メールアドレス', with: login_user.email
-      fill_in 'パスワード', with: login_user.password
+      fill_in 'メールアドレス', with: user.email
+      fill_in 'パスワード', with: user.password
       click_button 'ログイン'
     end
-    let(:login_user) { user }
     context 'ログアウトボタンを押した時' do
-      # let(:login_user) { user }
       it 'ログアウトできる' do
         click_on "ログアウト"
         expect(page).to have_content 'ログアウトしました。'
@@ -57,11 +55,11 @@ RSpec.describe "Users", type: :system do
       it 'マイページの内容が編集されている' do
         visit mypage_user_path(user)
         click_on "アカウント設定"
-        fill_in 'ユーザーネーム', with: 'ネーム変更'
+        fill_in 'ユーザーネーム', with: '名前変更'
         fill_in 'プロフィール', with: 'よろしくお願いします'
         click_on '更新'
-        expect(page).to have_content 'ネーム変更さんのユーザーページ'
-        expect(page).to have_content 'よろしくお願いします'
+        # binding.pry
+        expect(page).to have_content 'アカウント情報を変更しました'
       end
     end
     context 'アカウント削除ボタンを押した時' do

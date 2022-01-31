@@ -5,7 +5,7 @@
 <% if @user.image.present? %>
   <p>
     <strong>Image:</strong>
-    <%= image_tag @user.image.url if @user.image && @user.image.url %>
+    <%= image_tag @user.image.url, class: "rounded-circle" if @user.image && @user.image.url %>
   </p>
 <% end %>
 <br>

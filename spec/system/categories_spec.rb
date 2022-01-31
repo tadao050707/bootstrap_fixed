@@ -1,20 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "Categories", type: :system do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:user1) { FactoryBot.create(:user1) }
   let!(:user2) { FactoryBot.create(:user2) }
-  let!(:category) { FactoryBot.create(:category, user: user) }
-  let!(:category2) { FactoryBot.create(:category2, user: user) }
+  let!(:category) { FactoryBot.create(:category, user: user1) }
+  let!(:category2) { FactoryBot.create(:category2, user: user1) }
 
   describe 'カテゴリーCRUD機能' do
     before do
       visit new_user_session_path
-      fill_in 'メールアドレス', with: login_user.email
-      fill_in 'パスワード', with: login_user.password
+      fill_in 'メールアドレス', with: user1.email
+      fill_in 'パスワード', with: user1.password
       click_button 'ログイン'
       visit new_category_path
     end
-    let!(:login_user) { user }
 
     context 'ユーザーがカテゴリーを作成した時' do
       it '新しいカテゴリーが作成される' do
