@@ -5,55 +5,55 @@ RSpec.describe User, type: :model do
   describe 'ユーザー新規登録テスト' do
     context '名前、Eメール、パスワードが入力された場合' do
       it '新規アカウント登録ができる' do
-        user = FactoryBot.build(:user)
+        user = FactoryBot.build(:user1)
         expect(user).to be_valid
       end
     end
     context '名前が入力されなかった場合' do
       it 'バリデーションエラーになる' do
-        user = FactoryBot.build(:user, name: nil)
+        user = FactoryBot.build(:user1, name: nil)
         expect(user).to be_invalid
       end
     end
     context '名前が21字以上の場合' do
       it 'バリデーションエラーになる' do
-        user = FactoryBot.build(:user, name: 'a' * 21)
+        user = FactoryBot.build(:user1, name: 'a' * 21)
         expect(user).to be_invalid
       end
     end
     context 'Emailが入力されなかった場合' do
       it 'バリデーションエラーになる' do
-        user = FactoryBot.build(:user, email: nil)
+        user = FactoryBot.build(:user1, email: nil)
         expect(user).to be_invalid
       end
     end
     context 'Emailの形式が異なった場合' do
       it 'バリデーションエラーになる' do
-        user = FactoryBot.build(:user, email: 'aaaaaaemailcom')
+        user = FactoryBot.build(:user1, email: 'aaaaaaemailcom')
         expect(user).to be_invalid
       end
     end
     context 'プロフィールが256字以上の場合' do
       it 'バリデーションエラーになる' do
-        user = FactoryBot.build(:user, profile: 'a' * 256)
+        user = FactoryBot.build(:user1, profile: 'a' * 256)
         expect(user).to be_invalid
       end
     end
     context 'パスワードが無かった場合' do
       it 'バリデーションエラーになる' do
-        user = FactoryBot.build(:user, password: '')
+        user = FactoryBot.build(:user1, password: '')
         expect(user).to be_invalid
       end
     end
     context 'パスワードが５字以下の場合' do
       it 'バリデーションエラーになる' do
-        user = FactoryBot.build(:user, password: 'aaaaa')
+        user = FactoryBot.build(:user1, password: 'aaaaa')
         expect(user).to be_invalid
       end
     end
     context '大人の人数がマイナスの場合' do
       it 'バリデーションエラーになる' do
-        user = FactoryBot.build(:user, adult_number: -1)
+        user = FactoryBot.build(:user1, adult_number: -1)
         expect(user).to be_invalid
       end
     end

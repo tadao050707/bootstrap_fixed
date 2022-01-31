@@ -1,25 +1,21 @@
-<h2><%= @user.name %>さんのユーザーページ</h2>
+<h2><%= image_tag @user.image.url, class: "rounded-circle" if @user.image && @user.image.url || @user.image.present? %>
+<%= @user.name %>さんの固定支出</h2>
 <br>
-<%= link_to "マイページ", mypage_user_path %>
+<%= link_to "マイページ", mypage_user_path if current_user.id == @user.id %>
 <br><br>
-  <% if @user.image.present? %>
-    <p>
-      <strong>Image:</strong>
-      <%= image_tag @user.image.url if @user.image && @user.image.url %>
-    </p>
-  <% end %>
-  <br>
-  <h4>プロフィール</h4>
-  <%= @user.profile%>
-  <br><br>
+<% if current_user.id != @user.id %>
+<br>
+<h4>プロフィール</h4>
+<%= @user.profile %>
+<% end %>
 
-<br><br><br>
+<br><br>
 <h1>固定支出一覧</h1>
 <br><br>
 
 <% if current_user.id == @user.id %>
   <%= link_to "品目追加", new_fixed_cost_path, class: "btn btn-success btn-sm" %>
-  <%= link_to "カテゴリ作成", new_category_path,class: "btn btn-secondary btn-sm" %>
+  <%= link_to "カテゴリー作成", new_category_path,class: "btn btn-secondary btn-sm" %>
 <% end %>
 <% if @monthly_view == "true" %>
   <%= link_to "年額表示", user_path(params[:id], monthly_view: "false"), class: "btn btn-primary btn-sm" %>
@@ -32,7 +28,6 @@
 <%= pie_chart @costs,library: {title: {text: "支出<br>#{@total_monthly.sum}円 "}} %>
 <% end %>
 
-<br><br>
 <% total_annual = [] %>
 <% total_monthly = [] %>
 <% @fixed_costs.each do |fixed_cost| %>
@@ -104,7 +99,8 @@
   <% end %>
 </table>
 
-<br><br>
+<hr>
+<p id="notice"><%= flash[:notice1] %></p>
 <p>コメント一覧</p>
 <div id="comments_area">
   <%= render partial: 'comments/index', locals: { comments: @comments, user: @user } %>

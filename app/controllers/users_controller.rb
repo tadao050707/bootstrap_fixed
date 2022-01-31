@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     # @fixed_costs = @fixed_costs.eager_load(:monthly_annual)
     @comments = @user.comments
     @comment = @user.comments.build
+    # flash.now[:notice1] = 'コメント内容を変更しました'
     # params[:monthly_view] ? @monthly_view = "true" : params[:monthly_view]
 
     if params[:monthly_view].nil?

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user1) }
 
   describe 'コメント入力数のテスト' do
     context 'コメント数が256字以上の場合' do

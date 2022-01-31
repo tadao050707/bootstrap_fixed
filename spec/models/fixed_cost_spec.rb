@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe FixedCost, type: :model do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user1) }
 
   describe '固定支出表、入力のテスト' do
     context 'contentの入力が101字以上の場合' do

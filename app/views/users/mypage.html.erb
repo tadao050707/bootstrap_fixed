@@ -1,11 +1,11 @@
 <h1><%= @user.name %> さんのマイページ</h1>
 <br>
-<%= link_to "ユーザー情報の編集",edit_user_registration_path if current_user.id == @user.id %>
+<%= link_to "アカウント設定",edit_user_registration_path if current_user.id == @user.id %>
 <br>
 <% if @user.image.present? %>
   <p>
     <strong>Image:</strong>
-    <%= image_tag @user.image.url if @user.image && @user.image.url %>
+    <%= image_tag @user.image.url, class: "rounded-circle" if @user.image && @user.image.url %>
   </p>
 <% end %>
 <br>
