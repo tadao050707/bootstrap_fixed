@@ -100,7 +100,7 @@
 </table>
 
 <hr>
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= flash[:notice1] %></p>
 <p>コメント一覧</p>
 <div id="comments_area">
   <%= render partial: 'comments/index', locals: { comments: @comments, user: @user } %>
