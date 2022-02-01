@@ -36,7 +36,7 @@
               <li class="nav-item ml-3">
                 <%= link_to I18n.t('views.messages.logout'), destroy_user_session_path, method: :delete, class: "text-secondary" %>
               </li>
-              <li class="nav-item mr-3">
+              <li class="nav-item mx-3">
                 <%= link_to "管理者画面", rails_admin_path if current_user.admin? %>
               </li>
             <% else %>
@@ -51,18 +51,25 @@
         </div>
       </nav>
     </header>
-    <% if notice %>
-      <p class="alert alert-notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-error"><%= alert %></p>
-    <% end %>
 
-    <%= yield %>
+    <main>
+      <div class="dis_login">
+      <% if notice %>
+        <p class="alert alert-notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-error"><%= alert %></p>
+      <% end %>
 
-    <footer class="footer">
-      <p class="bg-light text-dark text-center text-secondary">©2022 Frugality</p>
+        <%= yield %>
+      </div>
+    </main>
+    <div class="bg-light">
+
+
+    <footer class="footer bg-light">
+      <p class="text-dark text-center text-secondary">©2022 Frugality</p>
     </footer>
-
+    </div>
   </body>
 </html>

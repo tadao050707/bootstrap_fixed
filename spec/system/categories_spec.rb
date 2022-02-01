@@ -18,7 +18,7 @@ RSpec.describe "Categories", type: :system do
     context 'ユーザーがカテゴリーを作成した時' do
       it '新しいカテゴリーが作成される' do
         fill_in 'カテゴリー名', with: 'サブスクリプション'
-        click_button '作成する'
+        click_button '登録'
         expect(page).to have_content 'サブスクリプション'
         expect(current_path).to eq new_category_path
       end
@@ -28,7 +28,7 @@ RSpec.describe "Categories", type: :system do
         # click_on '編集'
         all('tbody td')[1].click_on '編集'
         fill_in 'カテゴリー名', with: '編集したカテゴリー'
-        click_on '変更する'
+        click_on '変更'
         expect(page).to have_content '変更しました'
       end
     end

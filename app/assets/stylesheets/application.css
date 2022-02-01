@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+ body {
+   display: flex;
+   flex-flow: column;
+   min-height: 100vh;
+ }
+ main {
+   flex: 1;
+   background-color: #f8f9fa;
+   /* margin: 30px;   /* 外側の余白を30pxに */ */
+   /* padding: 0px;   /* 内側の余白を消す */ */
+   /* background-color: #ddffdd; /* 本文部分の背景色 */ */
+ }
+ /* .dis_login {
+   flex: 1;
+   min-height: 90vh;
+   background-color: red;
+ } */
