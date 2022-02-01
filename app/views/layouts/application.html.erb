@@ -15,49 +15,39 @@
 
   <body>
     <header class="sticky-top">
-      <nav class="navbar navbar-inverse navbar-expand-md bg-light">
-        <div class="container">
-            <!-- 追記ここから-->
-            <%= link_to "倹約アプリ(ロゴ)", root_path, id: "logo" %>
+      <nav class="navbar navbar-inverse navbar-expand-md navbar-light bg-light ">
+        <%= link_to "倹約アプリ(ロゴ)", root_path, id: "logo" %>
 
-          <!-- <div class="navbar-header"> -->
-            <!-- collapsed -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-              <!-- <span class="sr-only">Toggle navigation</span> -->
-              <%# if user_signed_in? %>
-                <!-- <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span> -->
-                <%# if current_user.admin? %>
-                  <!-- <span class="icon-bar"></span> -->
-                <%# end %>
-              <%# else %>
-                <!-- <span class="icon-bar"></span>
-                <span class="icon-bar"></span> -->
-              <%# end %>
-            </button>
-            <!-- 追記ここまで-->
-            <%#= link_to "倹約アプリ(ロゴ)", root_path, id: "logo" %>
-              <!-- 追記ここから-->
-          <!-- </div> -->
-            <!-- 追記ここまで -->
-          <div >
-            <!-- ulタグ内に「id="navbar"」を追記、classに「navbar-collapse collapse」を追記 -->
-            <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
-              <% if user_signed_in? %>
-                <li><%= link_to "みんなの投稿", fixed_costs_path %></li>
-                <li><%= link_to "固定支出表", user_path(current_user.id) %></li>
-                <li><%= link_to "マイページ", mypage_user_path(current_user.id) %></li>
-                <li><%= link_to I18n.t('views.messages.logout'), destroy_user_session_path, method: :delete %></li>
-                <li><%= link_to "管理者画面", rails_admin_path if current_user.admin? %></li>
-              <% else %>
-                <li><%= link_to I18n.t('views.messages.login'), new_user_session_path %></li>
-                <li><%= link_to I18n.t('views.messages.sign_up'), new_user_registration_path, class: 'btn btn-primary' %></li>
-              <% end %>
-            </ul>
-          </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDrop" aria-controls="navbarDrop" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarDrop">
+          <ul class="navbar-nav ml-auto font-weight-bold ">
+            <% if user_signed_in? %>
+              <li class="nav-item ml-3">
+                <%= link_to "みんなの投稿", fixed_costs_path, class: "text-secondary" %>
+              </li>
+              <li class="nav-item ml-3">
+                <%= link_to "固定支出表", user_path(current_user.id), class: "text-secondary" %>
+              </li>
+              <li class="nav-item ml-3">
+                <%= link_to "マイページ", mypage_user_path(current_user.id), class: "text-secondary" %>
+              </li>
+              <li class="nav-item ml-3">
+                <%= link_to I18n.t('views.messages.logout'), destroy_user_session_path, method: :delete, class: "text-secondary" %>
+              </li>
+              <li class="nav-item mr-3">
+                <%= link_to "管理者画面", rails_admin_path if current_user.admin? %>
+              </li>
+            <% else %>
+              <li class="nav-item ml-3">
+                <%= link_to I18n.t('views.messages.login'), new_user_session_path, class: "text-secondary" %>
+              </li>
+              <li class="nav-item mx-3">
+                <%= link_to I18n.t('views.messages.sign_up'), new_user_registration_path, class: "text-secondary" %>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </nav>
     </header>
@@ -71,7 +61,7 @@
     <%= yield %>
 
     <footer class="footer">
-      <p>©2022 Frugality</p>
+      <p class="bg-light text-dark text-center text-secondary">©2022 Frugality</p>
     </footer>
 
   </body>
