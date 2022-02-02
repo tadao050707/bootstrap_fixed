@@ -2,16 +2,12 @@
   <h2><%= image_tag @user.image.url, class: "rounded-circle" if @user.image && @user.image.url || @user.image.present? %>
   <%= @user.name %>さんの固定支出</h2>
   <br>
-  <%= link_to "マイページ", mypage_user_path if current_user.id == @user.id %>
-  <br><br>
+  <%#= link_to "マイページ", mypage_user_path if current_user.id == @user.id %>
   <% if current_user.id != @user.id %>
   <br>
   <h4>プロフィール</h4>
   <%= @user.profile %>
   <% end %>
-
-  <br><br>
-  <h1>固定支出一覧</h1>
   <br><br>
 
   <% if current_user.id == @user.id %>
@@ -101,7 +97,12 @@
   </table>
 
   <hr>
-  <p id="notice"><%= flash[:notice1] %></p>
+  <!-- <div class="text-danger"> -->
+  <span class="text-danger">
+    <p id="notice"><%= flash[:notice1] %></p>
+  </span>
+  <!-- </div> -->
+
   <p>コメント一覧</p>
   <div id="comments_area">
     <%= render partial: 'comments/index', locals: { comments: @comments, user: @user } %>

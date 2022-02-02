@@ -53,23 +53,19 @@
     </header>
 
     <main>
-      <div class="dis_login">
-      <% if notice %>
-        <p class="alert alert-notice"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-error"><%= alert %></p>
-      <% end %>
+      <div class="dis_login text-light bg-danger">
+        <% if notice %>
+          <p class="alert alert-notice"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-error"><%= alert %></p>
+        <% end %>
+      </div>
 
         <%= yield %>
-      </div>
     </main>
-    <div class="bg-light">
-
-
     <footer class="footer bg-light">
       <p class="text-dark text-center text-secondary">©2022 Frugality</p>
     </footer>
-    </div>
   </body>
 </html>
