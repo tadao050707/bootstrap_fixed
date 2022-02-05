@@ -20,10 +20,7 @@
     <%= link_to "月額表示", user_path(params[:id], monthly_view: "true"), class: "btn btn-primary btn-sm" %>
   <% end %>
 
-  <%= pie_chart @costs, donut: true, suffix: "円" %>
-  <% if false %>
-  <%= pie_chart @costs,library: {title: {text: "支出<br>#{@total_monthly.sum}円 "}} %>
-  <% end %>
+
 
   <% total_annual = [] %>
   <% total_monthly = [] %>
@@ -38,6 +35,8 @@
       <% total_annual << fixed_cost.payment %>
     <% end %>
   <% end %>
+
+  <%= pie_chart @costs,library: {title: {text: "支出<br>#{total_monthly.sum}円 "}} %>
 
   <% if @monthly_view == "true" %>
     <h3>月額合計支出：<%= total_monthly.sum %>円</h3>
