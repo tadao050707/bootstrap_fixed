@@ -1,7 +1,9 @@
 Chartkick.options = {
   donut: true, # ドーナツグラフ
-  width: '400px',
-  colors: [ "#769fcd",
+  width: '350px',
+  colors: [ "#75A9FF",
+            "#A4C6FF",
+            "#769fcd",
             "#b9d7ea",
             "#d6e6f2",
             "#f7fbfc",
@@ -24,7 +26,7 @@ Chartkick.options = {
       pie: {
         dataLabels: {
           enabled: true,
-          distance: -40, # ラベルの位置調節
+          distance: -20, # ラベル（テキスト）の位置調節
           allowOverlap: false, # ラベルが重なったとき、非表示にする
           style: { #ラベルフォントの設定
             color: '#555',
@@ -32,7 +34,7 @@ Chartkick.options = {
             textOutline: 0, #デフォルトではラベルが白枠で囲まれていてダサいので消す
           }
         },
-        size: '80%',
+        size: '100%',
         innerSize: '60%', # ドーナツグラフの中の円の大きさ
         borderWidth: 0,
       }
