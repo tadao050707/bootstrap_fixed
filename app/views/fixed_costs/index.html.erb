@@ -1,29 +1,27 @@
-<div class="container-fluid mx-auto" style="width: 100rem">
+<div class="container">
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-md-3">
     </div>
 
-    <div class="col-sm-6" >
-    <!-- <div class="d-flex justify-content-center"> -->
-    <h2>みんなの固定費一覧画面</h2>
-    <!-- カードで設計 -->
-    <% @users.each do |user| %>
-      <div class="card shadow-sm card-center" style="max-width: 25rem; margin-bottom: 10px ">
-        <% total_annual = [] %>
-        <% total_monthly = [] %>
-        <% user.fixed_costs.each do |fixed_cost| %>
-          <% if fixed_cost.monthly_annual == "annual" %>
-            <% total_annual << fixed_cost.payment %>
-            <% total_monthly << monthly_payment(fixed_cost) %>
-          <% elsif fixed_cost.monthly_annual == "monthly" %>
-            <% total_annual << annual_payment(fixed_cost) %>
-            <% total_monthly << fixed_cost.payment %>
+    <div class="col-md-6" >
+      <h2>みんなの固定費一覧画面</h2>
+      <!-- カードで設計 -->
+      <% @users.each do |user| %>
+        <div class="card shadow-sm card-center" style="max-width: 25rem; margin: 0 auto; ">
+          <% total_annual = [] %>
+          <% total_monthly = [] %>
+          <% user.fixed_costs.each do |fixed_cost| %>
+            <% if fixed_cost.monthly_annual == "annual" %>
+              <% total_annual << fixed_cost.payment %>
+              <% total_monthly << monthly_payment(fixed_cost) %>
+            <% elsif fixed_cost.monthly_annual == "monthly" %>
+              <% total_annual << annual_payment(fixed_cost) %>
+              <% total_monthly << fixed_cost.payment %>
+            <% end %>
           <% end %>
-        <% end %>
 
-        <div class="card-body">
-          <h6 class="card-title">
-            <!-- <div class=" d-flex flex-row "> -->
+          <div class="card-body">
+            <h6 class="card-title">
               <div class="">
                 <div class="">
                   <% if user.image.present? %>
@@ -33,23 +31,20 @@
                 <div class="">
                   <%= link_to "#{user.name}", user_path(user.id) %>
                 </div>
-            <!-- </div> -->
                 <div class="">
                   月額支出：<%= total_monthly.sum %>円
                 </div>
               </div>
-            <!-- </div> -->
-          </h6>
-
+            </h6>
+          </div>
+          <div class="card-footer bg-transparent">
+            <%= l user.created_at, format: :mid %>
+          </div>
         </div>
-        <div class="card-footer bg-transparent">
-          <%= l user.created_at, format: :mid %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
 
-  <div class="col-sm-3">
+    <div class="col-md-3">
+    </div>
   </div>
-</div>
 </div>
